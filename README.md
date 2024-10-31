@@ -57,17 +57,17 @@
 
 ## Lv 4. 테스트코드 & AOP `선택`
 ### **1. 테스트 연습 1 (예상대로 성공하는지에 대한 케이스입니다.)**
-[x]테스트 패키지 `package org.example.expert.config;` 의 `PassEncoderTest` 클래스에 있는 `matches_메서드가_정상적으로_동작한다()` 테스트가 의도대로 성공할 수 있게 수정해 주세요.
+- [x] 테스트 패키지 `package org.example.expert.config;` 의 `PassEncoderTest` 클래스에 있는 `matches_메서드가_정상적으로_동작한다()` 테스트가 의도대로 성공할 수 있게 수정해 주세요.
 
 ### **2. 테스트 연습 2 (예상대로 예외처리 하는지에 대한 케이스입니다.**
-[x]테스트 패키지 `package org.example.expert.domain.manager.service;` 의 `ManagerServiceTest` 의 클래스에 있는 `manager_목록_조회_시_Todo가_없다면_NPE_에러를_던진다()` 테스트가 성공하고 컨텍스트와 일치하도록 **테스트 코드**와 **테스트 코드 메서드 명**을 수정해 주세요.
+- [x] 테스트 패키지 `package org.example.expert.domain.manager.service;` 의 `ManagerServiceTest` 의 클래스에 있는 `manager_목록_조회_시_Todo가_없다면_NPE_에러를_던진다()` 테스트가 성공하고 컨텍스트와 일치하도록 **테스트 코드**와 **테스트 코드 메서드 명**을 수정해 주세요.
 
-[x]테스트 패키지 `org.example.expert.domain.comment.service;` 의 `CommentServiceTest` 의 클래스에 있는 `comment_등록_중_할일을_찾지_못해_에러가_발생한다()` 테스트가 성공할 수 있도록 **테스트 코드**를 수정해 주세요.
+- [x] 테스트 패키지 `org.example.expert.domain.comment.service;` 의 `CommentServiceTest` 의 클래스에 있는 `comment_등록_중_할일을_찾지_못해_에러가_발생한다()` 테스트가 성공할 수 있도록 **테스트 코드**를 수정해 주세요.
 
-[x]테스트 패키지 `org.example.expert.domain.manager.service`의 `ManagerServiceTest` 클래스에 있는 `todo의_user가_null인_경우_예외가_발생한다()` 테스트가 성공할 수 있도록 **서비스 로직**을 수정해 주세요.
+- [x] 테스트 패키지 `org.example.expert.domain.manager.service`의 `ManagerServiceTest` 클래스에 있는 `todo의_user가_null인_경우_예외가_발생한다()` 테스트가 성공할 수 있도록 **서비스 로직**을 수정해 주세요.
 
 ### **3. AOP**
-[x]Spring AOP를 사용하여 해당 API들에 대한 접근 로그를 기록하는 기능을 구현
+- [x] Spring AOP를 사용하여 해당 API들에 대한 접근 로그를 기록하는 기능을 구현
 - 어드민 사용자만 접근할 수 있는 특정 API에는 접근할 때마다 접근 로그를 기록해야 합니다.
     - 패키지 `org.example.expert.domain.comment.controller;` 의 `CommentAdminController` 클래스에 있는 `deleteComment()`
     - 패키지 `package org.example.expert.domain.user.controller;` 의 `UserAdminController` 클래스에 있는 `changeUserRole()`
