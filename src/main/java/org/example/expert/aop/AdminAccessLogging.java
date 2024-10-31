@@ -7,6 +7,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -38,7 +39,7 @@ public class AdminAccessLogging {
 
 		// - 요청한 사용자의 ID
 		HttpServletRequest httpServletRequest = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-		String userId = (String) httpServletRequest.getAttribute("userId");
+		Long userId = (Long)httpServletRequest.getAttribute("userId");
 
 		// - API 요청 URL
 		String requestURI = httpServletRequest.getRequestURI();
