@@ -7,8 +7,8 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -19,13 +19,8 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @RequiredArgsConstructor
 public class AdminAccessLogging {
-
-	private final
-
-	// 	- 요청한 사용자의 ID
-	// - API 요청 시각
-	// - API 요청 URL
-	// - response, request body도 찍기
+	private final ObjectMapper objectMapper = new ObjectMapper();
+	private final HttpServletRequest httpServletRequest;
 
 	// @Pointcut("execution(* org.example.expert.domain.auth.controller.AuthController.signin(..))")
 	// void signin() {}
@@ -36,18 +31,33 @@ public class AdminAccessLogging {
 
 	@Around("delete() || changeUserRole() /*|| signin()*/")
 	public Object execute(ProceedingJoinPoint joinPoint) throws Throwable {
-
+		// - API 요청 시각
 		LocalDateTime apiRequestTime = LocalDateTime.now();
-		System.out.println("API 요청 시각 : " + apiRequestTime);
 
-		HttpServletRequest httpServletRequest = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+		// 	- 요청한 사용자의 ID
 		String userId = (String)httpServletRequest.getAttribute("userId");
 
+		// - API 요청 URL
+		String requestURI = httpServletRequest.getRequestURI();
+
+		// - request body
+		String requestBody = objectMapper.writeValueAsString(joinPoint.getArgs());
+
+		Object output = null;
+		String responseBody = null;
+
 		try {
-			Object output = joinPoint.proceed();
+			output = joinPoint.proceed();
+			// - response body
+			responseBody = objectMapper.writeValueAsString(output);
 			return output;
 		} finally {
 
+			log.info("요청한 사용자의 ID : {}", userId);
+			log.info("API 요청 시각 : {}", apiRequestTime);
+			log.info("API 요청 URL : {}", requestURI);
+			log.info("API request : {}", requestBody);
+			log.info("API response : {}", responseBody);
 		}
 	}
 }
